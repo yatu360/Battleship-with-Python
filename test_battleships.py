@@ -1,6 +1,7 @@
 import pytest
 from battleships import *
 
+#new commit 06122020
 def test_is_sunk1():
     s = "A"
     assert is_sunk(s) == True
