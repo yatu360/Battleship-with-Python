@@ -1,70 +1,42 @@
-#see the readme.md file for description and data 
-#new commit
-
-
 def is_sunk(ship):
-    if ship == "A":
-        return True
-    else:
-        return False
+    #remove pass and add your implementation
+    pass
 
 def ship_type(ship):
-    if ship == "A":
-        return True
-    else:
-        return False
+    #remove pass and add your implementation
+    pass
 
 def is_open_sea(row, column, fleet):
-    if row == 3 and column == 4:
-        if fleet == "A":
-            return True
-        else:
-            return False
+    #remove pass and add your implementation
+    pass
 
 def ok_to_place_ship_at(row, column, horizontal, length, fleet):
-    if row == 3 and column == 4:
-        if horizontal == 6 and length == 3:
-            if fleet == "B":
-                return True
-            else:
-                return False
-
-        
+    #remove pass and add your implementation
+    pass
 
 def place_ship_at(row, column, horizontal, length, fleet):
-    if row == 3 and column == 4:
-        if horizontal == 6 and length == 3:
-            if fleet == "B":
-                return True
-            else:
-                return False
+    #remove pass and add your implementation
+    pass
 
 def randomly_place_all_ships():
-    return True
+    #remove pass and add your implementation
+    pass
 
 def check_if_hits(row, column, fleet):
-    if row == 3 and column == 4:
-        if fleet == "A":
-            return True
-        else:
-            return False
-
+    #remove pass and add your implementation
+    pass
 
 def hit(row, column, fleet):
-  if row == 3 and column == 4:
-        if fleet == "A":
-            return True
-        else:
-            return False
+    #remove pass and add your implementation
+    pass
 
 def are_unsunk_ships_left(fleet):
-    if fleet == "A":
-        return True
-    else:
-        return False
+    #remove pass and add your implementation
+    pass
 
 def main():
-
+    #the implementation provided below is indicative only
+    #you should improve it or fully rewrite to provide better functionality (see readme file)
     current_fleet = randomly_place_all_ships()
 
     game_over = False
