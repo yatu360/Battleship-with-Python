@@ -9,17 +9,13 @@ def ship_type(ship):
     pass
 
 def is_open_sea(row, column, fleet):
-    check = (row, column)
     for x in range(len(fleet)):
-        if check in fleet[x][4]:
-            return False
-        else: 
-            for coord in fleet[x][4]:
-                r = coord[0]
-                c = coord[1]
-                if check == (r+1, c) or check ==(r, c+1) or check==(r-1, c) or check==(r, c-1) or check == (r-1, c-1) or check==(r+1, c+1) or check==(r+1, c-1) or check == (r-1, c+1):
-                    return False
-    #print(check)
+        r = fleet[x][0]
+        c = fleet[x][1]
+        if fleet [x][2] == False and row >= r-1 and row <= (r+fleet[x][3]) and column >= c-1 and column <= c+1:
+                return False
+        if fleet [x][2] == True and row >= r-1 and row <= r+1 and column >= c-1 and column <= (c+fleet[x][3]):
+                return False 
     return True
 
 def ok_to_place_ship_at(row, column, horizontal, length, fleet):
@@ -29,38 +25,35 @@ def ok_to_place_ship_at(row, column, horizontal, length, fleet):
     for x in range(length):
         if horizontal == True:
             if (column+length)>9:
-                return fleet
+                return False
             else:
                 col1 = column + x
                 if is_open_sea(row, col1, fleet) == True:
                     count +=1
                     if count == length:
                         place_ship_at (row, column, horizontal, length, fleet)
+                else:
+                    return False
      
         else:
             if (row+length)>9:
-                return fleet
+                return False
             else:
                 row1 = row + x
                 if is_open_sea(row1, column, fleet) == True:
                     count +=1
                     if count == length:
                         place_ship_at (row, column, horizontal, length, fleet)
+                else:
+                    return False
 
 def place_ship_at(row, column, horizontal, length, fleet):
-    ship = []
     s = []
-    for x in range(length):
-        if horizontal == True:
-            ship_cod = (row, column+x)
-        else:
-            ship_cod = (row+x, column)
-        ship.append(ship_cod)
     s.append(row)
     s.append(column)
     s.append(horizontal)
     s.append(length)
-    s.append(set(ship))
+    s.append(set())
     fleet.append(tuple(s))    
     return fleet
 
