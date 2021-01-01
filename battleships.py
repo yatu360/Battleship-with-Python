@@ -1,4 +1,5 @@
 import random
+import copy
 
 def is_sunk(ship):
     #remove pass and add your implementation
@@ -86,9 +87,20 @@ def check_if_hits(row, column, fleet):
                 return True 
     return False
 
+
 def hit(row, column, fleet):
-    #remove pass and add your implementation
-    pass
+    z = 0
+    fleet1 = copy.deepcopy(fleet)
+    for x in range(len(fleet)):
+        r = fleet[x][0]
+        c = fleet[x][1]
+        if fleet [x][2] == False and row >= r and row <= (r+(fleet[x][3]-1)) and column == c:
+            fleet1[x][4].add((row, column))
+            z = x
+        if fleet [x][2] == True and row == r  and column >= c and column <= (c+(fleet[x][3])-1):
+            fleet1[x][4].add((row, column))
+            z = x
+    return (fleet1, fleet1[z])
 
 def are_unsunk_ships_left(fleet):
     #remove pass and add your implementation
