@@ -6,8 +6,8 @@ def is_sunk(ship):
    else:    return False
 
 def ship_type(ship):
-    #remove pass and add your implementation
-    pass
+    ship_dict = {4: "battleship", 3: "cruiser", 2: "destroyer", 1: "submarines"}
+    return ship_dict[ship[3]]
 
 def is_open_sea(row, column, fleet):
     for x in range(len(fleet)):
@@ -103,8 +103,9 @@ def hit(row, column, fleet):
     return (fleet1, fleet1[z])
 
 def are_unsunk_ships_left(fleet):
-    #remove pass and add your implementation
-    pass
+    for x in range(len(fleet)):
+        if fleet[x][3]!=len(fleet[x][4]):   return True
+    return False
 
 def main():
     #the implementation provided below is indicative only
