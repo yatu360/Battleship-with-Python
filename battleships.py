@@ -81,10 +81,8 @@ def check_if_hits(row, column, fleet):
     for x in range(len(fleet)):
         r = fleet[x][0]
         c = fleet[x][1]
-        if fleet [x][2] == False and row >= r and row <= (r+(fleet[x][3]-1)) and column == c:
-                return True
-        if fleet [x][2] == True and row == r  and column >= c and column <= (c+(fleet[x][3])-1):
-                return True 
+        if fleet [x][2] == False and row >= r and row <= (r+(fleet[x][3]-1)) and column == c:   return True
+        if fleet [x][2] == True and row == r  and column >= c and column <= (c+(fleet[x][3])-1):    return True 
     return False
 
 
