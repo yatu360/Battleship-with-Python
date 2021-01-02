@@ -2,8 +2,8 @@ import random
 import copy
 
 def is_sunk(ship):
-    #remove pass and add your implementation
-    pass
+   if ship[3]==len(ship[4]):    return True
+   else:    return False
 
 def ship_type(ship):
     #remove pass and add your implementation
