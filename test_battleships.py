@@ -1,7 +1,7 @@
 import pytest
 from battleships import *
 
-s = (2, 3, False, 3, {(2,3), (3,3), (4,3)})
+s = (2, 3, False, 3, {(2,3), (3,3), (4,3)}) 
 #we use global variables if certain ships or fleets are used in multiple test functions
 
 def test_is_sunk1():
