@@ -128,7 +128,7 @@ def main():
         else:
             print("You missed!")
 
-        if not are_unsunk_shis_left(current_fleet): game_over = True
+        if not are_unsunk_ships_left(current_fleet): game_over = True
 
     print("Game over! You required", shots, "shots.")
 
