@@ -2,6 +2,7 @@ from tkinter import*
 from functools import partial
 
 import battleships
+#Gui
 
 current_fleet = battleships.randomly_place_all_ships()
 root = Tk()
