@@ -14,8 +14,14 @@ label4= Label(root, text="")
 label4.grid(row=13, column=1, columnspan=10)
 label5= Label(root, text="")
 label5.grid(row=14, column=1, columnspan=10)
-label6 = Label(root, text="Ship Key: B = Battleship (4 shots), C = Cruiser(3 shots), D = Destroyer (2 shots), S = Submarine (1 shot) ", fg="blue")
-label6.grid(row=15, column=1, columnspan=10)
+label6 = Label(root, text="Hit Key: Grey = Not Attempted ", fg="black")
+label6.grid(row=15, column=0, columnspan=9)
+label6 = Label(root, text="Blue = Miss ", fg="blue")
+label6.grid(row=15, column=2, columnspan=10)
+label6 = Label(root, text="Red = Hit ", fg="red")
+label6.grid(row=15, column=5, columnspan=10)
+label9 = Label(root, text="Ship Key: B = Battleship (4 shots), C = Cruiser(3 shots), D = Destroyer (2 shots), S = Submarine (1 shot) ", fg="blue")
+label9.grid(row=16, column=1, columnspan=10)
 shots = 0
 game_over = False
 
@@ -43,7 +49,7 @@ def button_click(number):
         shotstaken= ("Shots taken: "+ str(shots))
         label4.config(text=shotstaken)
         if not battleships.are_unsunk_ships_left(current_fleet): 
-            label5.config(text= "Game over! You required:" + str(shots) +" shots.")
+            label5.config(text= "Game over! You required: " + str(shots) +" shots.")
             game_over=True
     
 def ship_reveal(ship_hit):
