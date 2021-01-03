@@ -112,7 +112,11 @@ def main():
     shots = 0
 
     while not game_over:
-        loc_str = input("Enter row and colum to shoot (separted by space): ").split()    
+        loc_str = input("Enter row and colum to shoot (separted by space) of Enter End to exit game: ")
+        if loc_str == "End" or loc_str =="end":
+            game_over=True
+            break
+        loc_str = loc_str.split()
         current_row = int(loc_str[0])
         current_column = int(loc_str[1])
         shots += 1
