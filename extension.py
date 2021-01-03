@@ -40,7 +40,8 @@ def button_click(number):
     if not battleships.are_unsunk_ships_left(current_fleet): label5.config(text= "Game over! You required:" + str(shots) +" shots.")
     
     
-
+def close_window(): 
+    root.destroy()
 
 
 
@@ -59,6 +60,9 @@ def main():
     
             btn = Button(root, text="", padx=20, pady=10, command=partial(button_click, (x-1, y-1)))
             btn.grid(column=y, row=x, sticky=W)
+
+    
+    Button(root, text="Exit", padx=20, pady=10, command=partial(close_window)).grid(column=11, row=12, rowspan=3, sticky=W)
 
     root.mainloop()
 
