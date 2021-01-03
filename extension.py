@@ -11,11 +11,16 @@ label2= Label(root, text="")
 label2.grid(row=11, column=0, columnspan=10)
 label3= Label(root, text="")
 label3.grid(row=12, column=0, columnspan=10)
-
+label4= Label(root, text="")
+label4.grid(row=13, column=0, columnspan=10)
+label5= Label(root, text="")
+label5.grid(row=14, column=0, columnspan=10)
+shots = 0
 
 
 def button_click(number):
-
+    global shots
+    shots +=1
     global current_fleet
     row = number[0]
     col = number[1]
@@ -30,6 +35,9 @@ def button_click(number):
         label2.config(text = "You missed!")
         Button(root, text="", bg="blue", padx=20, pady=10, command=partial(button_click, (row, col)), relief="sunken").grid(column=col+1, row=row+1, sticky=W)
         label3.config(text = " ")
+    shotstaken= ("Shots taken: "+ str(shots))
+    label4.config(text=shotstaken)
+    if not battleships.are_unsunk_ships_left(current_fleet): label5.config(text= "Game over! You required:" + str(shots) +" shots.")
     
     
 
