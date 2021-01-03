@@ -106,8 +106,6 @@ def are_unsunk_ships_left(fleet):
     return False
 
 def main():
-    #the implementation provided below is indicative only
-    #you should improve it or fully rewrite to provide better functionality (see readme file)
     current_fleet = randomly_place_all_ships()
 
     game_over = False
