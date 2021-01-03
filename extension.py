@@ -7,13 +7,15 @@ current_fleet = battleships.randomly_place_all_ships()
 root = Tk()
 root.title("Battleship Game: POP1 Coursework by Yathurshen Muralitharan")
 label2= Label(root, text="")
-label2.grid(row=11, column=0, columnspan=10)
+label2.grid(row=11, column=1, columnspan=10)
 label3= Label(root, text="")
-label3.grid(row=12, column=0, columnspan=10)
+label3.grid(row=12, column=1, columnspan=10)
 label4= Label(root, text="")
-label4.grid(row=13, column=0, columnspan=10)
+label4.grid(row=13, column=1, columnspan=10)
 label5= Label(root, text="")
-label5.grid(row=14, column=0, columnspan=10)
+label5.grid(row=14, column=1, columnspan=10)
+label6 = Label(root, text="Ship Key: B = Battleship (4 shots), C = Cruiser(3 shots), D = Destroyer (2 shots), S = Submarine (1 shot) ", fg="blue")
+label6.grid(row=15, column=1, columnspan=10)
 shots = 0
 game_over = False
 
@@ -73,8 +75,8 @@ def button_placement():
             btn = Button(root, text=" ", height=1, width=1, padx=20, pady=10, command=partial(button_click, (x-1, y-1)))
             btn.grid(column=y, row=x, sticky=W)
     
-    Button(root, text="Exit", padx=20, pady=10, command=partial(close_window)).grid(column=11, row=12, rowspan=3, sticky=W)
-    Button(root, text="New Game", padx=20, pady=10, command=partial(new_game)).grid(column=0, row=12, columnspan=3, rowspan=3, sticky=W)
+    Button(root, text="Exit", fg="red", padx=20, pady=10, command=partial(close_window)).grid(column=11, row=12, rowspan=3, sticky=W)
+    Button(root, text="New Game", fg="blue", padx=20, pady=10, command=partial(new_game)).grid(column=0, row=12, columnspan=3, rowspan=3, sticky=W)
 
 def grid_placement():
     for y in range(10):
@@ -92,6 +94,8 @@ def main():
     button_placement() 
 
     root.mainloop()
+
+
 
 if __name__ == '__main__': 
    main()
