@@ -15,29 +15,34 @@ label4.grid(row=13, column=0, columnspan=10)
 label5= Label(root, text="")
 label5.grid(row=14, column=0, columnspan=10)
 shots = 0
+game_over = False
 
 
 def button_click(number):
     global shots
-    shots +=1
     global current_fleet
-    row = number[0]
-    col = number[1]
-    if battleships.check_if_hits(row, col, current_fleet):
-        label2.config(text = "You have a hit!")
-        Button(root, text=" ", bg="red", height=1, width=1, padx=20, pady=10, command=partial(button_click, (row, col)), relief="sunken").grid(column=col+1, row=row+1, sticky=W)
-        (current_fleet, ship_hit) = battleships.hit(row, col, current_fleet)
-        if battleships.is_sunk(ship_hit):
+    global game_over
+    if game_over==False:
+        shots +=1
+        row = number[0]
+        col = number[1]
+        if battleships.check_if_hits(row, col, current_fleet):
+            label2.config(text = "You have a hit!")
+            Button(root, text=" ", bg="red", height=1, width=1, padx=20, pady=10, command=partial(button_click, (row, col)), relief="sunken").grid(column=col+1, row=row+1, sticky=W)
+            (current_fleet, ship_hit) = battleships.hit(row, col, current_fleet)
+            if battleships.is_sunk(ship_hit):
                 ship_reveal(ship_hit)
                 disptext = ("You sank a " + battleships.ship_type(ship_hit) + "!")
                 label3.config(text= disptext)
-    else:
-        label2.config(text = "You missed!")
-        Button(root, text=" ", bg="blue",height=1, width=1, padx=20, pady=10, command=partial(button_click, (row, col)), relief="sunken").grid(column=col+1, row=row+1, sticky=W)
-        label3.config(text = " ")
-    shotstaken= ("Shots taken: "+ str(shots))
-    label4.config(text=shotstaken)
-    if not battleships.are_unsunk_ships_left(current_fleet): label5.config(text= "Game over! You required:" + str(shots) +" shots.")
+        else:
+            label2.config(text = "You missed!")
+            Button(root, text=" ", bg="blue",height=1, width=1, padx=20, pady=10, command=partial(button_click, (row, col)), relief="sunken").grid(column=col+1, row=row+1, sticky=W)
+            label3.config(text = " ")
+        shotstaken= ("Shots taken: "+ str(shots))
+        label4.config(text=shotstaken)
+        if not battleships.are_unsunk_ships_left(current_fleet): 
+            label5.config(text= "Game over! You required:" + str(shots) +" shots.")
+            game_over=True
     
 def ship_reveal(ship_hit):
     ship_dict = {4: "B", 3: "C", 2: "D", 1: "S"}
@@ -50,14 +55,16 @@ def close_window():
 def new_game():
     global current_fleet
     global shots
+    global game_over
+    game_over = False
     shots = 0
     current_fleet = battleships.randomly_place_all_ships()
     button_placement()
     label2.config(text="")
     label3.config(text="")
     label4.config(text="")
+    label5.config(text="")
 
-    
     
 def button_placement():
     for x in range(1, 11): 
