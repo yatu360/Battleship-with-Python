@@ -8,6 +8,7 @@ def is_sunk(ship):
    if ship[3]==len(ship[4]):    return True
    else:    return False
 
+
 '''
 ship_type(ship) -- returns one of the strings "battleship", "cruiser", "destroyer", or "submarine" identifying the type of ship
 '''
@@ -15,11 +16,11 @@ def ship_type(ship):
     ship_dict = {4: "battleship", 3: "cruiser", 2: "destroyer", 1: "submarines"}
     return ship_dict[ship[3]]
 
+
 '''
 is_open_sea(row, column, fleet) -- checks if the square given by row and column neither contains nor is adjacent (horizontally, vertically, 
 or diagonally) to some ship in fleet. Returns Boolean True if so and False otherwise
 '''
-
 def is_open_sea(row, column, fleet):
     for x in range(len(fleet)):
         r = fleet[x][0]
@@ -30,6 +31,12 @@ def is_open_sea(row, column, fleet):
                 return False 
     return True
 
+
+'''
+ok_to_place_ship_at(row, column, horizontal, length, fleet)-- checks if addition of a ship, specified by row, column, horizontal, and length as in ship 
+representation above, to the fleet results in a legal arrangement (see the figure above). If so, the function returns Boolean True and it returns False otherwise. 
+This function makes use of the function is_open_sea
+'''
 def ok_to_place_ship_at(row, column, horizontal, length, fleet):
     row1 = 0
     col1 = 0
@@ -59,6 +66,11 @@ def ok_to_place_ship_at(row, column, horizontal, length, fleet):
                 else:
                     return False
 
+
+'''
+place_ship_at(row, column, horizontal, length, fleet) -- returns a new fleet that is the result of adding a ship, specified by row, column, horizontal, 
+and length as in ship representation above, to fleet. It may be assumed that the resulting arrangement of the new fleet is legal.
+'''
 def place_ship_at(row, column, horizontal, length, fleet):
     s = []
     s.append(row)
@@ -69,11 +81,13 @@ def place_ship_at(row, column, horizontal, length, fleet):
     fleet.append(tuple(s))    
     return fleet
 
+'''
+randomly_place_all_ships() -- returns a fleet that is a result of a random legal arrangement of the 10 ships in the ocean. This function makes use of the 
+functions ok_to_place_ship_at and place_ship_at
+'''
 def randomly_place_all_ships():
     fleet = []
-
     while len(fleet) < 10:
-
         row = random.randint(0, 9)
         col = random.randint(0, 9)
         horizontal = bool(random.getrandbits(1))
@@ -88,6 +102,11 @@ def randomly_place_all_ships():
         (ok_to_place_ship_at (row, col, horizontal, length, fleet))
     return fleet
 
+
+'''
+check_if_hits(row, column, fleet) -- returns Boolean value, which is True if the shot of the human player at the square represented by row and column hits any 
+of the ships of fleet, and False otherwise.
+'''
 def check_if_hits(row, column, fleet):
     for x in range(len(fleet)):
         r = fleet[x][0]
@@ -97,6 +116,11 @@ def check_if_hits(row, column, fleet):
     return False
 
 
+'''
+hit(row, column, fleet) -- returns a tuple (fleet1, ship) where ship is the ship from the fleet fleet that receives a hit by the shot at the square represented by 
+row and column, and fleet1 is the fleet resulting from this hit. It may be assumed that shooting at the square row, column results in hitting of some ship in fleet.
+Note that ship must represent the ship after the hit.
+'''
 def hit(row, column, fleet):
     z = 0
     fleet1 = copy.deepcopy(fleet)
@@ -111,11 +135,19 @@ def hit(row, column, fleet):
             z = x
     return (fleet1, fleet1[z])
 
+
+'''
+are_unsunk_ships_left(fleet) -- returns Boolean value, which is True if there are ships in the fleet that are still not sunk, and False otherwise
+'''
 def are_unsunk_ships_left(fleet):
     for x in range(len(fleet)):
         if fleet[x][3]!=len(fleet[x][4]):   return True
     return False
 
+
+'''
+main -- Where the program starts the execution of all the functions
+'''
 def main():
     current_fleet = randomly_place_all_ships()
 
