@@ -11,17 +11,38 @@ def test_ship_type1():
     assert ship_type(s) == "cruiser"
 
 
-s1 = (2, 3, False, 3, set())
-s2 = (6, 9, False, 4, set())
-f = [s1, s2]
+s1_t1 = (2, 3, False, 3, set())
+s2_t1 = (6, 9, False, 4, set())
+f_t1 = [s1_t1, s2_t1]
+
+s1_t2 = (2, 3, False, 3, set())
+s2_t2 = (6, 9, False, 4, set())
+f_t2 = [s1_t2, s2_t2]
+
+s1_t3 = (2, 3, False, 3, set())
+s2_t3 = (6, 9, False, 4, set())
+f_t3 = [s1_t3, s2_t3]
+
+s1_t4 = (2, 3, False, 3, set())
+s2_t4 = (6, 9, False, 4, set())
+f_t4 = [s1_t4, s2_t4]
+
+s1_t5 = (2, 3, False, 3, set())
+s2_t5 = (6, 9, False, 4, set())
+f_t5 = [s1_t5, s2_t5]
 
 def test_is_open_sea1(): 
-    assert is_open_sea(5,8,f) == False
+    assert is_open_sea(5,8,f_t1) == False
 
     
 def test_ok_to_place_ship_at1():
     assert ok_to_place_ship_at(5,7, True, 2, f) == False
 
+def test_ok_to_place_ship_at2():
+    assert ok_to_place_ship_at(6,2, True, 2, f) == False
+
+def test_ok_to_place_ship_at3():
+    assert ok_to_place_ship_at(6,2, True, 2, f) == False
 
 def test_place_ship_at1():
     actual = place_ship_at(5,6, True, 2, f)

@@ -1,13 +1,24 @@
 import random
 import copy
 
+'''
+is_sunk-- Returns Boolean value, which is True if ship is sunk and False otherwise
+'''
 def is_sunk(ship):
    if ship[3]==len(ship[4]):    return True
    else:    return False
 
+'''
+ship_type(ship) -- returns one of the strings "battleship", "cruiser", "destroyer", or "submarine" identifying the type of ship
+'''
 def ship_type(ship):
     ship_dict = {4: "battleship", 3: "cruiser", 2: "destroyer", 1: "submarines"}
     return ship_dict[ship[3]]
+
+'''
+is_open_sea(row, column, fleet) -- checks if the square given by row and column neither contains nor is adjacent (horizontally, vertically, 
+or diagonally) to some ship in fleet. Returns Boolean True if so and False otherwise
+'''
 
 def is_open_sea(row, column, fleet):
     for x in range(len(fleet)):
