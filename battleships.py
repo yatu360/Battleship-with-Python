@@ -5,7 +5,7 @@ import copy
 is_sunk-- Returns Boolean value, which is True if ship is sunk and False otherwise
 '''
 def is_sunk(ship):
-   if ship[3]==len(ship[4]):    return True
+   if ship[3]==len(ship[4]):    return True #checks if all the coordinates of the ship has been identified by the player
    else:    return False
 
 
@@ -14,7 +14,7 @@ ship_type(ship) -- returns one of the strings "battleship", "cruiser", "destroye
 '''
 def ship_type(ship):
     ship_dict = {4: "battleship", 3: "cruiser", 2: "destroyer", 1: "submarines"}
-    return ship_dict[ship[3]]
+    return ship_dict[ship[3]]   #Checks with the dictionary and returns the type of ship using the length of the ship stored in the data set.
 
 
 '''
@@ -23,11 +23,11 @@ or diagonally) to some ship in fleet. Returns Boolean True if so and False other
 '''
 def is_open_sea(row, column, fleet):
     for x in range(len(fleet)):
-        r = fleet[x][0]
-        c = fleet[x][1]
-        if fleet [x][2] == False and row >= r-1 and row <= (r+fleet[x][3]) and column >= c-1 and column <= c+1:
+        r = fleet[x][0] #Iterates the already placed ships initial row location to r
+        c = fleet[x][1] #Iterates the already placed ships initial row location to c
+        if fleet [x][2] == False and row >= r-1 and row <= (r+fleet[x][3]) and column >= c-1 and column <= c+1: #Checks to see if the ship to be placed is outside the illegal zones 
                 return False
-        if fleet [x][2] == True and row >= r-1 and row <= r+1 and column >= c-1 and column <= (c+fleet[x][3]):
+        if fleet [x][2] == True and row >= r-1 and row <= r+1 and column >= c-1 and column <= (c+fleet[x][3]): #Same as above but when placed ships are horizontal
                 return False 
     return True
 
@@ -43,19 +43,19 @@ def ok_to_place_ship_at(row, column, horizontal, length, fleet):
     count = 0
     for x in range(length):
         if horizontal == True:
-            if (column+length)>9:
+            if (column+length)>9: #Restriction to not allow ships to be place outside grid from the y-axis(column)
                 return False
             else:
                 col1 = column + x
                 if is_open_sea(row, col1, fleet) == True:
-                    count +=1
-                    if count == length:
+                    count +=1 
+                    if count == length: #check to ensure all the coordinates of the ship is verified as legal
                         place_ship_at (row, column, horizontal, length, fleet)
                 else:
                     return False
      
         else:
-            if (row+length)>9:
+            if (row+length)>9: #Restriction to not allow ships to be place outside grid from the x-axis(row)
                 return False
             else:
                 row1 = row + x
@@ -80,6 +80,7 @@ def place_ship_at(row, column, horizontal, length, fleet):
     s.append(set())
     fleet.append(tuple(s))    
     return fleet
+
 
 '''
 randomly_place_all_ships() -- returns a fleet that is a result of a random legal arrangement of the 10 ships in the ocean. This function makes use of the 
@@ -111,8 +112,8 @@ def check_if_hits(row, column, fleet):
     for x in range(len(fleet)):
         r = fleet[x][0]
         c = fleet[x][1]
-        if fleet [x][2] == False and row >= r and row <= (r+(fleet[x][3]-1)) and column == c:   return True
-        if fleet [x][2] == True and row == r  and column >= c and column <= (c+(fleet[x][3])-1):    return True 
+        if fleet [x][2] == False and row >= r and row <= (r+(fleet[x][3]-1)) and column == c:   return True #Iterates to check if there is any hit
+        if fleet [x][2] == True and row == r  and column >= c and column <= (c+(fleet[x][3])-1):    return True #Iterates to check if there is any hit
     return False
 
 
@@ -123,7 +124,7 @@ Note that ship must represent the ship after the hit.
 '''
 def hit(row, column, fleet):
     z = 0
-    fleet1 = copy.deepcopy(fleet)
+    fleet1 = copy.deepcopy(fleet) 
     for x in range(len(fleet)):
         r = fleet[x][0]
         c = fleet[x][1]
