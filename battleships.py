@@ -1,5 +1,5 @@
 import random
-import copy
+
 
 
 def is_sunk(ship):
@@ -120,7 +120,7 @@ def hit(row, column, fleet):
     Note that ship must represent the ship after the hit.
     '''
     z = 0
-    fleet1 = copy.deepcopy(fleet) 
+    fleet1 = fleet #Creates a shallow copy of fleet
     for x in range(len(fleet)):
         r = fleet[x][0]
         c = fleet[x][1]
@@ -151,7 +151,7 @@ def main():
         loc_str = input("Enter row and colum to shoot (separted by space) of Enter End to exit game: ")
         if loc_str == "End" or loc_str =="end":
             break
-        try: #Catches any error for illegal entries
+        try: #Catches any error for illegal entries (Only legal inputs will be counted as a shot)
             loc_str = loc_str.split()
             current_row = int(loc_str[0])
             current_column = int(loc_str[1])
@@ -167,7 +167,7 @@ def main():
             else:
                 print("You tried to hit outside the allowed area, please try again within 0 to 9")
         except: #handles the error
-            print("Enter valid input please, which is in range of 0 to 9 for row and column, separated by space ex: 1 5")
+            print("Enter valid input please, which is in range of 0 to 9 for row and column, separated by space ex: 1 5 ....or 'End' or 'end' to Exit")
         if not are_unsunk_ships_left(current_fleet): game_over = True
     if game_over == True:
         print("Game over! You required", shots, "shots.")
