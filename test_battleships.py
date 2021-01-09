@@ -11,20 +11,20 @@ def test_ship_type1():
     assert ship_type(s) == "cruiser"
 
 
-s1_t1 = (2, 3, False, 3, set())
+s1_t1 = (8, 3, False, 3, set())
 s2_t1 = (6, 9, False, 4, set())
 f_t1 = [s1_t1, s2_t1]
 
 s1_t2 = (2, 3, False, 3, set())
-s2_t2 = (6, 9, False, 4, set())
+s2_t2 = (6, 1, False, 2, set())
 f_t2 = [s1_t2, s2_t2]
 
 s1_t3 = (2, 3, False, 3, set())
 s2_t3 = (6, 9, False, 4, set())
 f_t3 = [s1_t3, s2_t3]
 
-s1_t4 = (2, 3, False, 3, set())
-s2_t4 = (6, 9, False, 4, set())
+s1_t4 = (2, 2, False, 3, set())
+s2_t4 = (5, 6, False, 4, set())
 f_t4 = [s1_t4, s2_t4]
 
 s1_t5 = (2, 3, False, 3, set())
@@ -36,13 +36,19 @@ def test_is_open_sea1():
 
     
 def test_ok_to_place_ship_at1():
-    assert ok_to_place_ship_at(5,7, True, 2, f) == False
+    assert ok_to_place_ship_at(5,7, True, 2, f_t1) == False #Test to check adjacent illegal placement
 
 def test_ok_to_place_ship_at2():
-    assert ok_to_place_ship_at(6,2, True, 2, f) == False
+    assert ok_to_place_ship_at(3,1, True, 4, f_t2) == False #Test to check if a new ship will overlap with existing (illegal placement)
 
 def test_ok_to_place_ship_at3():
-    assert ok_to_place_ship_at(6,2, True, 2, f) == False
+    assert ok_to_place_ship_at(3,9, True, 2, f_t3) == False #Test to check if new ship can be placed outside the allowed column grid 9<
+
+def test_ok_to_place_ship_at4():
+    assert ok_to_place_ship_at(4,4, True, 3, f_t4) == False #Test to check if a new ship will overlap with existing (illegal placement)
+
+def test_ok_to_place_ship_at5():
+    assert ok_to_place_ship_at(9,3, False, 2, f_t5) == False #Test to check if new ship can be placed outside the allowed row grid 9<
 
 def test_place_ship_at1():
     actual = place_ship_at(5,6, True, 2, f)
