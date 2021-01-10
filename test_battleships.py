@@ -2,7 +2,7 @@ import pytest
 from battleships import *
 
 s = (2, 3, False, 3, {(2,3), (3,3), (4,3)}) 
-#we use global variables if certain ships or fleets are used in multiple test functions
+
 
 def test_is_sunk1():
     assert is_sunk(s) == True
@@ -45,16 +45,19 @@ def test_hit1():
     expected.sort()
     assert (actual, s) == (expected, (9, 2, True, 3, {(9,2), (9,3), (9,4)}))
 
+def test_are_unsunk_ships_left1():
+    assert are_unsunk_ships_left(f1)==True
+
+
 
 #Test Case 2
-s = (2, 3, False, 3, {(2,3), (3,3), (4,3)}) 
-#we use global variables if certain ships or fleets are used in multiple test functions
+s2 = (1, 2, True, 4, {(1,2), (1,3), (1,4), (1,5)}) 
 
-def test_is_sunk1():
-    assert is_sunk(s) == True
+def test_is_sunk2():
+    assert is_sunk(s2) == True
     
-def test_ship_type1():
-    assert ship_type(s) == "cruiser"
+def test_ship_type2():
+    assert ship_type(s2) == "battleship"
 
 s1_t2 = (2, 3, False, 3, set())
 s2_t2 = (6, 1, False, 2, set())
@@ -88,16 +91,22 @@ def test_hit2():
     expected.sort()
     assert (actual, s) == (expected, (2, 4, False, 1, {(2,4)}))
 
+f2_1 = [(6, 2, True, 4, {(6,2), (6,3), (6,5),(6,4)}), (5, 9, False, 3, {(5,9),(6,9),(7,9)}), (4, 5, True, 3, {(4,5),(4,6),(4,7)}), (8, 1, True, 2,{(8,1),(8,2)}), (2, 9, False, 2, {(2,9), (3,9)}), (8, 5, True, 2, {(8,5), (8,6)}), \
+        (1, 2, False, 1, {(1,2)}), (6, 7, True, 1, {(6,7)}), (2, 4, False, 1, {(2,4)}), (0, 6, False, 1, {(0,6)})]
+
+def test_are_unsunk_ships_left2():
+    assert are_unsunk_ships_left(f2_1)==False #Checks and returns that all the ships have been sunk
+
 
 #Test Case 3
-s = (2, 3, False, 3, {(2,3), (3,3), (4,3)}) 
+s3 = (7, 3, False, 2, {(7,3)}) 
 #we use global variables if certain ships or fleets are used in multiple test functions
 
-def test_is_sunk1():
-    assert is_sunk(s) == True
+def test_is_sunk3():
+    assert is_sunk(s3) == False
     
-def test_ship_type1():
-    assert ship_type(s) == "cruiser"
+def test_ship_type3():
+    assert ship_type(s3) == "destroyer"
 
 s1_t3 = (2, 3, False, 3, set())
 s2_t3 = (6, 9, False, 4, set())
@@ -130,6 +139,22 @@ def test_hit3():
     expected.sort()
     assert (actual, s) == (expected, (8, 1, True, 2, {(8,1), (8,2)}))
 
+f3_1 = [(6, 2, True, 4, {(6,2), (6,3),(6,4)}), (5, 9, False, 3, {(5,9),(6,9),(7,9)}), (4, 5, True, 3, {(4,5),(4,6),(4,7)}), (8, 1, True, 2,{(8,1),(8,2)}), (2, 9, False, 2, {(2,9), (3,9)}), (8, 5, True, 2, {(8,5), (8,6)}), \
+        (1, 2, False, 1, {(1,2)}), (6, 7, True, 1, {(6,7)}), (2, 4, False, 1, set()), (0, 6, False, 1, {(0,6)})]
+
+def test_are_unsunk_ships_left3():
+    assert are_unsunk_ships_left(f3_1)==True #2 shot remaining for all sunk
+
+#Test case 4
+
+s4 = (2, 3, True, 1, set()) 
+#we use global variables if certain ships or fleets are used in multiple test functions
+
+def test_is_sunk4():
+    assert is_sunk(s4) == False
+    
+def test_ship_type4():
+    assert ship_type(s4) == "submarine"
 
 s1_t4 = (2, 2, False, 3, set())
 s2_t4 = (5, 6, False, 4, set())
@@ -156,10 +181,6 @@ f4 = [(6, 2, True, 4, set()), (5, 9, False, 3, set()), (4, 5, True, 3, set()), (
 def test_check_if_hits4():
     assert check_if_hits(1,2,f4) == True
 
-s1_t5 = (2, 3, False, 3, set())
-s2_t5 = (6, 9, False, 4, set())
-f_t5 = [s1_t5, s2_t5]
-
 def test_check_if_hits4():
     (actual,s) = hit(0,6,f4)
     actual.sort()
@@ -168,13 +189,34 @@ def test_check_if_hits4():
     expected.sort()
     assert (actual, s) == (expected, (0, 6, False, 1, {(0,6)}))
 
+f4_1 = [(6, 2, True, 4, {(6,2), (6,3), (6,5),(6,4)}), (5, 9, False, 3, {(5,9),(6,9)}), (4, 5, True, 3, {(4,5),(4,6),(4,7)}), (8, 1, True, 2,{(8,1),(8,2)}), (2, 9, False, 2, {(2,9), (3,9)}), (8, 5, True, 2, {(8,5), (8,6)}), \
+        (1, 2, False, 1, {(1,2)}), (6, 7, True, 1, {(6,7)}), (2, 4, False, 1, {(2,4)}), (0, 6, False, 1, {(0,6)})]
+
+def test_are_unsunk_ships_left4():
+    assert are_unsunk_ships_left(f4_1)==True #Test for One shot remaining for all sunk --Cruiser only has been shot twice
+
+#Test case 5
+
+s5 = (2, 0, True, 4, {(2,0), (2,1), (2,2), (2,3)}) 
+#we use global variables if certain ships or fleets are used in multiple test functions
+
+def test_is_sunk5():
+    assert is_sunk(s5) == True
+    
+def test_ship_type5():
+    assert ship_type(s5) == "battleship"
+
+s1_t5 = (2, 3, False, 3, set())
+s2_t5 = (6, 9, False, 4, set())
+f_t5 = [s1_t5, s2_t5]
+
 def test_is_open_sea5(): 
     assert is_open_sea(5,4,f_t5) == False #Test to check illegal bottom left diagonal placement
 
 def test_ok_to_place_ship_at5():
     assert ok_to_place_ship_at(9,3, False, 2, f_t5) == False #Test to check if new ship can be placed outside the allowed row grid 9<
 
-def test_ok_to_place_ship_at5():
+def test_place_ship_at5():
     actual = place_ship_at(9,0, True, 2, f_t5)
     actual.sort() #Sort required to use == safely
     expected = [s1_t5, s2_t5, (9,0, True, 2, set())]
@@ -196,7 +238,8 @@ def test_check_if_hits5():
     expected.sort()
     assert (actual, s) == (expected, (6, 2, True, 4, {(6,2), (6,3), (6,4), (6,5)}))    
 
+f5_1 = [(6, 2, True, 4, set()), (5, 9, False, 3, {(5,9),(6,9),(7,9)}), (4, 5, True, 3, {(4,5),(4,6),(4,7)}), (8, 1, True, 2,{(8,1),(8,2)}), (2, 9, False, 2, {(2,9), (3,9)}), (8, 5, True, 2, {(8,5), (8,6)}), \
+        (1, 2, False, 1, {(1,2)}), (6, 7, True, 1, {(6,7)}), (2, 4, False, 1, {(2,4)}), (0, 6, False, 1, {(0,6)})]
 
-
-def test_are_unsunk_ships_left1():
-    assert are_unsunk_ships_left(f1)==True
+def test_are_unsunk_ships_left5():
+    assert are_unsunk_ships_left(f5_1)==True

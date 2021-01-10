@@ -13,7 +13,7 @@ def ship_type(ship):
     '''
     Returns one of the strings "battleship", "cruiser", "destroyer", or "submarine" identifying the type of ship
     '''
-    ship_dict = {4: "battleship", 3: "cruiser", 2: "destroyer", 1: "submarines"}
+    ship_dict = {4: "battleship", 3: "cruiser", 2: "destroyer", 1: "submarine"}
     return ship_dict[ship[3]]   #Checks with the dictionary and returns the type of ship using the length of the ship stored in the data set.
 
 def is_open_sea(row, column, fleet):
@@ -172,7 +172,7 @@ def main():
     if game_over == True:
         print("Game over! You required", shots, "shots.")
     else:
-        print("Game over, you lost! You exited after", shots, "shots.")
+        print("Game over, you lost! You exited the game after", shots, "shots.")
 
 
 if __name__ == '__main__': #keep this in
