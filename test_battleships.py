@@ -29,12 +29,21 @@ def test_place_ship_at1():
     expected.sort()
     assert expected == actual
 
-f1 = [(3, 2, True, 4, set()), (9, 2, True, 3, set()), (5, 3, True, 3, set()), (8, 7, True, 2, set()), (0, 6, True, 2, set()), (5, 1, False, 2, set()), \
+f1 = [(3, 2, True, 4, set()), (9, 2, True, 3, {(9,2), (9,4)}), (5, 3, True, 3, set()), (8, 7, True, 2, set()), (0, 6, True, 2, set()), (5, 1, False, 2, set()), \
         (1, 0, False, 1, set()), (1, 2, True, 1, set()), (7, 3, True, 1, set()), (7, 5, False, 1, set())]
 
     
 def test_check_if_hits1():
     assert check_if_hits(9,4,f1) == True #check for hit
+
+
+def test_hit1():
+    (actual,s) = hit(9,3,f1)
+    actual.sort()
+    expected = [(3, 2, True, 4, set()), (9, 2, True, 3, {(9,2), (9,3), (9,4)}), (5, 3, True, 3, set()), (8, 7, True, 2, set()), (0, 6, True, 2, set()), (5, 1, False, 2, set()), \
+        (1, 0, False, 1, set()), (1, 2, True, 1, set()), (7, 3, True, 1, set()), (7, 5, False, 1, set())] 
+    expected.sort()
+    assert (actual, s) == (expected, (9, 2, True, 3, {(9,2), (9,3), (9,4)}))
 
 
 s1_t2 = (2, 3, False, 3, set())
@@ -61,6 +70,14 @@ f2 = [(6, 2, True, 4, set()), (5, 9, False, 3, set()), (4, 5, True, 3, set()), (
 def test_check_if_hits2():
     assert check_if_hits(6,6,f2) == False #check for miss
 
+def test_hit2():
+    (actual,s) = hit(2,4,f2)
+    actual.sort()
+    expected = [(6, 2, True, 4, set()), (5, 9, False, 3, set()), (4, 5, True, 3, set()), (8, 1, True, 2, set()), (2, 9, False, 2, set()), (8, 5, True, 2, set()), \
+        (1, 2, False, 1, set()), (6, 7, True, 1, set()), (2, 4, False, 1, {(2,4)}), (0, 6, False, 1, set())]
+    expected.sort()
+    assert (actual, s) == (expected, (2, 4, False, 1, {(2,4)}))
+
 
 s1_t3 = (2, 3, False, 3, set())
 s2_t3 = (6, 9, False, 4, set())
@@ -79,12 +96,20 @@ def test_place_ship_at3():
     expected.sort()
     assert expected == actual
 
-f3 = [(6, 2, True, 4, set()), (5, 9, False, 3, set()), (4, 5, True, 3, set()), (8, 1, True, 2, set()), (2, 9, False, 2, set()), (8, 5, True, 2, set()), \
+f3 = [(6, 2, True, 4, set()), (5, 9, False, 3, set()), (4, 5, True, 3, set()), (8, 1, True, 2, {(8,2)}), (2, 9, False, 2, set()), (8, 5, True, 2, set()), \
         (1, 2, False, 1, set()), (6, 7, True, 1, set()), (2, 4, False, 1, set()), (0, 6, False, 1, set())]
-
 
 def test_check_if_hits3():
     assert check_if_hits(3,9,f3) == True 
+
+def test_hit3():
+    (actual,s) = hit(8,1,f3)
+    actual.sort()
+    expected = [(6, 2, True, 4, set()), (5, 9, False, 3, set()), (4, 5, True, 3, set()), (8, 1, True, 2, {(8,1), (8,2)}), (2, 9, False, 2, set()), (8, 5, True, 2, set()), \
+        (1, 2, False, 1, set()), (6, 7, True, 1, set()), (2, 4, False, 1, set()), (0, 6, False, 1, set())]
+    expected.sort()
+    assert (actual, s) == (expected, (8, 1, True, 2, {(8,1), (8,2)}))
+
 
 s1_t4 = (2, 2, False, 3, set())
 s2_t4 = (5, 6, False, 4, set())
@@ -137,13 +162,7 @@ def test_check_if_hits5():
 
     
 
-def test_hit1():
-    (actual,s) = hit(5,1,f1)
-    actual.sort()
-    expected = [(1,1,True, 3, set()), (1,6, False, 2, set()), (2,9, False, 2, set()), (3,0,True, 1, set()), \
-                  (3,2,True,3, set()), (5,1,True,2, {(5,2), (5,1)}), (5,4,True,1, set()), (5,7,True,1,set()), (6,9,False,4,set()), (9, 0, True, 1, set()) ] 
-    expected.sort()
-    assert (actual, s) == (expected, (5,1,True,2, {(5,2), (5,1)}))
+
 
 def test_are_unsunk_ships_left1():
     assert are_unsunk_ships_left(f1)==True
