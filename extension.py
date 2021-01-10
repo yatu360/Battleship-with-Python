@@ -27,6 +27,11 @@ game_over = False
 
 
 def button_click(number):
+    '''
+    This function is called when a button is clicked and sends the cordinates (row and column) to the battleship program where the information is processed and
+    gets returned if the shot has hit a ship or not. This function also checks if the shot ship has been sunk and if there are any remaining ships left to be sunked. When a ship
+    is sunked, ship_hit is passed to ship_reveal.
+    '''
     global shots
     global current_fleet
     global game_over
@@ -36,7 +41,7 @@ def button_click(number):
         col = number[1]
         if battleships.check_if_hits(row, col, current_fleet):
             label2.config(text = "You have a hit!")
-            Button(root, text=" ", bg="red", height=1, width=1, padx=20, pady=10, command=partial(button_click, (row, col)), relief="sunken").grid(column=col+1, row=row+1, sticky=W)
+            Button(root, text=" ", bg="red", height=1, width=1, padx=20, pady=10, command=partial(button_click, (row, col)), relief="sunken").grid(column=col+1, row=row+1, sticky=W) #changes the attributes of the existing buttons to sunken to make the player aware this is already hit and red (because fire is read) 
             (current_fleet, ship_hit) = battleships.hit(row, col, current_fleet)
             if battleships.is_sunk(ship_hit):
                 ship_reveal(ship_hit)
@@ -44,7 +49,7 @@ def button_click(number):
                 label3.config(text= disptext)
         else:
             label2.config(text = "You missed!")
-            Button(root, text=" ", bg="blue",height=1, width=1, padx=20, pady=10, command=partial(button_click, (row, col)), relief="sunken").grid(column=col+1, row=row+1, sticky=W)
+            Button(root, text=" ", bg="blue",height=1, width=1, padx=20, pady=10, command=partial(button_click, (row, col)), relief="sunken").grid(column=col+1, row=row+1, sticky=W) #changes the attributes of the existing buttons to sunken to make the player aware this is already hit and blue (because sea/ocean is blue) 
             label3.config(text = " ")
         shotstaken= ("Shots taken: "+ str(shots))
         label4.config(text=shotstaken)
@@ -52,15 +57,26 @@ def button_click(number):
             label5.config(text= "Game over! You required: " + str(shots) +" shots.")
             game_over=True
     
+
 def ship_reveal(ship_hit):
+    '''
+    This function is called when a ship is sunked to reveal the type of ship on the board. It receives ship_hit from button_click function, then changes the attributes of the cell buttons
+    to contain the respective ship identifier.
+    '''
     ship_dict = {4: "B", 3: "C", 2: "D", 1: "S"}
     for coordinate in sorted(ship_hit[4]):
         Button(root, text=ship_dict[ship_hit[3]], bg="red", fg="white",height=1, width=1, padx=20, pady=10, command=partial(button_click, (coordinate[0], coordinate[1])), relief="sunken").grid(column=coordinate[1]+1, row=coordinate[0]+1, sticky=W)
     
 def close_window(): 
-    root.destroy()
+    '''
+    This function is called when the player clicks exit game button.
+    '''
+    root.destroy()  # Terminates the mainloop and deletes all widgets.
 
 def new_game():
+    '''
+    This function is an extra to create a proper game feel, where it's called when the player clicks the 'New Game' button
+    '''
     global current_fleet
     global shots
     global game_over
@@ -75,8 +91,11 @@ def new_game():
 
     
 def button_placement():
-    for x in range(1, 11): 
-        for y in range(1, 11):
+    '''
+    This function creates the 10x10 visual grid buttons and assigns each button to its respective cordinates, ex: top left is (0, 0) and bottow right is (9, 9)
+    '''
+    for x in range(1, 11): #For loop for row iteration 
+        for y in range(1, 11):  #For loop for column iteration
     
             btn = Button(root, text=" ", height=1, width=1, padx=20, pady=10, command=partial(button_click, (x-1, y-1)))
             btn.grid(column=y, row=x, sticky=W)
@@ -85,6 +104,9 @@ def button_placement():
     Button(root, text="New Game", fg="blue", padx=20, pady=10, command=partial(new_game)).grid(column=0, row=12, columnspan=3, rowspan=3, sticky=W)
 
 def grid_placement():
+    '''
+    This function creates the row and column labels which is a requirement in the spec.
+    '''
     for y in range(10):
         label1= Label(root, text=y, padx=20, pady=10)
         label1.grid(row=0, column=y+1)
@@ -95,7 +117,9 @@ def grid_placement():
 
 
 def main():
-   
+    '''
+    The main function which starts the execution of all the functions.
+    '''
     grid_placement()
     button_placement() 
 
