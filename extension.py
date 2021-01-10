@@ -4,10 +4,10 @@ import battleships
 
 
 current_fleet = battleships.randomly_place_all_ships()
-root = Tk()
-root.title("Battleship Game: POP1 Coursework by Yathurshen Muralitharan")
-label2= Label(root, text="")
-label2.grid(row=11, column=1, columnspan=10)
+root = Tk() #
+root.title("Battleship Game: POP1 Coursework by Yathurshen Muralitharan") #Set window title
+label2= Label(root, text="")                                              #Creates a label widget using the label class
+label2.grid(row=11, column=1, columnspan=10)                              #Set its position on the form using the grid function and provides it the location
 label3= Label(root, text="")
 label3.grid(row=12, column=1, columnspan=10)
 label4= Label(root, text="")
@@ -18,7 +18,7 @@ label6 = Label(root, text="Hit Key: Grey = Not Attempted ", fg="black")
 label6.grid(row=15, column=0, columnspan=9)
 label6 = Label(root, text="Blue = Miss ", fg="blue")
 label6.grid(row=15, column=2, columnspan=10)
-label6 = Label(root, text="Red = Hit ", fg="red")
+label6 = Label(root, text="Red = Hit ", fg="red")                          ##Set its position on the form using the grid function, provides it the location and other attributes like colour
 label6.grid(row=15, column=5, columnspan=10)
 label9 = Label(root, text="Ship Key: B = Battleship (4 shots), C = Cruiser(3 shots), D = Destroyer (2 shots), S = Submarine (1 shot) ", fg="blue")
 label9.grid(row=16, column=1, columnspan=10)
