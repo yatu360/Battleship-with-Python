@@ -79,6 +79,12 @@ def test_place_ship_at3():
     expected.sort()
     assert expected == actual
 
+f3 = [(6, 2, True, 4, set()), (5, 9, False, 3, set()), (4, 5, True, 3, set()), (8, 1, True, 2, set()), (2, 9, False, 2, set()), (8, 5, True, 2, set()), \
+        (1, 2, False, 1, set()), (6, 7, True, 1, set()), (2, 4, False, 1, set()), (0, 6, False, 1, set())]
+
+
+def test_check_if_hits3():
+    assert check_if_hits(3,9,f3) == True 
 
 s1_t4 = (2, 2, False, 3, set())
 s2_t4 = (5, 6, False, 4, set())
@@ -98,6 +104,13 @@ def test_place_ship_at4():
     assert expected == actual
 
 
+f4 = [(6, 2, True, 4, set()), (5, 9, False, 3, set()), (4, 5, True, 3, set()), (8, 1, True, 2, set()), (2, 9, False, 2, set()), (8, 5, True, 2, set()), \
+        (1, 2, False, 1, set()), (6, 7, True, 1, set()), (2, 4, False, 1, set()), (0, 6, False, 1, set())]
+
+
+def test_check_if_hits4():
+    assert check_if_hits(1,2,f4) == True
+
 s1_t5 = (2, 3, False, 3, set())
 s2_t5 = (6, 9, False, 4, set())
 f_t5 = [s1_t5, s2_t5]
@@ -115,7 +128,12 @@ def test_ok_to_place_ship_at5():
     expected.sort()
     assert expected == actual
     
+f5 = [(6, 2, True, 4, set()), (5, 9, False, 3, set()), (4, 5, True, 3, set()), (8, 1, True, 2, set()), (2, 9, False, 2, set()), (8, 5, True, 2, set()), \
+        (1, 2, False, 1, set()), (6, 7, True, 1, set()), (2, 4, False, 1, set()), (0, 6, False, 1, set())]
 
+
+def test_check_if_hits5():
+    assert check_if_hits(0,1,f5) == False
 
     
 
