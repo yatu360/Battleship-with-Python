@@ -46,6 +46,16 @@ def test_hit1():
     assert (actual, s) == (expected, (9, 2, True, 3, {(9,2), (9,3), (9,4)}))
 
 
+#Test Case 2
+s = (2, 3, False, 3, {(2,3), (3,3), (4,3)}) 
+#we use global variables if certain ships or fleets are used in multiple test functions
+
+def test_is_sunk1():
+    assert is_sunk(s) == True
+    
+def test_ship_type1():
+    assert ship_type(s) == "cruiser"
+
 s1_t2 = (2, 3, False, 3, set())
 s2_t2 = (6, 1, False, 2, set())
 f_t2 = [s1_t2, s2_t2]
@@ -78,6 +88,16 @@ def test_hit2():
     expected.sort()
     assert (actual, s) == (expected, (2, 4, False, 1, {(2,4)}))
 
+
+#Test Case 3
+s = (2, 3, False, 3, {(2,3), (3,3), (4,3)}) 
+#we use global variables if certain ships or fleets are used in multiple test functions
+
+def test_is_sunk1():
+    assert is_sunk(s) == True
+    
+def test_ship_type1():
+    assert ship_type(s) == "cruiser"
 
 s1_t3 = (2, 3, False, 3, set())
 s2_t3 = (6, 9, False, 4, set())
@@ -140,6 +160,14 @@ s1_t5 = (2, 3, False, 3, set())
 s2_t5 = (6, 9, False, 4, set())
 f_t5 = [s1_t5, s2_t5]
 
+def test_check_if_hits4():
+    (actual,s) = hit(0,6,f4)
+    actual.sort()
+    expected = [(6, 2, True, 4, set()), (5, 9, False, 3, set()), (4, 5, True, 3, set()), (8, 1, True, 2, set()), (2, 9, False, 2, set()), (8, 5, True, 2, set()), \
+        (1, 2, False, 1, set()), (6, 7, True, 1, set()), (2, 4, False, 1, set()), (0, 6, False, 1, {(0,6)})]
+    expected.sort()
+    assert (actual, s) == (expected, (0, 6, False, 1, {(0,6)}))
+
 def test_is_open_sea5(): 
     assert is_open_sea(5,4,f_t5) == False #Test to check illegal bottom left diagonal placement
 
@@ -153,14 +181,20 @@ def test_ok_to_place_ship_at5():
     expected.sort()
     assert expected == actual
     
-f5 = [(6, 2, True, 4, set()), (5, 9, False, 3, set()), (4, 5, True, 3, set()), (8, 1, True, 2, set()), (2, 9, False, 2, set()), (8, 5, True, 2, set()), \
+f5 = [(6, 2, True, 4, {(6,2), (6,3), (6,5)}), (5, 9, False, 3, set()), (4, 5, True, 3, set()), (8, 1, True, 2, set()), (2, 9, False, 2, set()), (8, 5, True, 2, set()), \
         (1, 2, False, 1, set()), (6, 7, True, 1, set()), (2, 4, False, 1, set()), (0, 6, False, 1, set())]
 
 
 def test_check_if_hits5():
     assert check_if_hits(0,1,f5) == False
 
-    
+def test_check_if_hits5():
+    (actual,s) = hit(6,4,f5)
+    actual.sort()
+    expected = [(6, 2, True, 4, {(6,2), (6,3), (6,4), (6,5)}), (5, 9, False, 3, set()), (4, 5, True, 3, set()), (8, 1, True, 2, set()), (2, 9, False, 2, set()), (8, 5, True, 2, set()), \
+        (1, 2, False, 1, set()), (6, 7, True, 1, set()), (2, 4, False, 1, set()), (0, 6, False, 1, set())]
+    expected.sort()
+    assert (actual, s) == (expected, (6, 2, True, 4, {(6,2), (6,3), (6,4), (6,5)}))    
 
 
 
