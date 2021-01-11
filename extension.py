@@ -39,8 +39,8 @@ def button_click(number):
         shots +=1
         row = number[0]
         col = number[1]
-        if battleships.check_if_not_already_hit(row, col, current_fleet):
-            if battleships.check_if_hits(row, col, current_fleet):
+        if battleships.check_if_hits(row, col, current_fleet):
+            if battleships.check_if_not_already_hit(row, col, current_fleet):
                 label2.config(text = "You have a hit!")
                 Button(root, text=" ", bg="red", height=1, width=1, padx=20, pady=10, command=partial(button_click, (row, col)), relief="sunken").grid(column=col+1, row=row+1, sticky=W) #changes the attributes of the existing buttons to sunken to make the player aware this is already hit and red (because fire is read) 
                 (current_fleet, ship_hit) = battleships.hit(row, col, current_fleet)
@@ -49,12 +49,13 @@ def button_click(number):
                     disptext = ("You sank a " + battleships.ship_type(ship_hit) + "!")
                     label3.config(text= disptext)
             else:
-                label2.config(text = "You missed!")
-                Button(root, text=" ", bg="blue",height=1, width=1, padx=20, pady=10, command=partial(button_click, (row, col)), relief="sunken").grid(column=col+1, row=row+1, sticky=W) #changes the attributes of the existing buttons to sunken to make the player aware this is already hit and blue (because sea/ocean is blue) 
+                label2.config(text = "You missed! -- You have already hit this location")
                 label3.config(text = " ")
         else:
-            label2.config(text = "You missed! -- You have already hit this location")
+            label2.config(text = "You missed!")
+            Button(root, text=" ", bg="blue",height=1, width=1, padx=20, pady=10, command=partial(button_click, (row, col)), relief="sunken").grid(column=col+1, row=row+1, sticky=W) #changes the attributes of the existing buttons to sunken to make the player aware this is already hit and blue (because sea/ocean is blue) 
             label3.config(text = " ")
+
         shotstaken= ("Shots taken: "+ str(shots))
         label4.config(text=shotstaken)
         if not battleships.are_unsunk_ships_left(current_fleet): 
