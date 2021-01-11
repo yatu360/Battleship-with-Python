@@ -6,8 +6,10 @@ def is_sunk(ship):
     '''
     Returns Boolean value, which is True if ship is sunk and False otherwise
     '''
-    if ship[3]==len(ship[4]):   return True
-    else:    return False
+    if ship[3]==len(ship[4]):   
+        return True
+    else:
+        return False
 
 def ship_type(ship):
     '''
@@ -48,7 +50,7 @@ def ok_to_place_ship_at(row, column, horizontal, length, fleet):
                 if is_open_sea(row, col1, fleet) == True:
                     count +=1 
                     if count == length: #check to ensure all the coordinates of the ship is verified as legal
-                        place_ship_at (row, column, horizontal, length, fleet)
+                        return True
                 else:
                     return False
      
@@ -60,7 +62,7 @@ def ok_to_place_ship_at(row, column, horizontal, length, fleet):
                 if is_open_sea(row1, column, fleet) == True:
                     count +=1
                     if count == length:
-                        place_ship_at (row, column, horizontal, length, fleet)
+                        return True
                 else:
                     return False
 
@@ -97,7 +99,8 @@ def randomly_place_all_ships():
             length = 2
         elif len(fleet) < 10:
             length = 1
-        (ok_to_place_ship_at (row, col, horizontal, length, fleet))
+        if (ok_to_place_ship_at (row, col, horizontal, length, fleet))==True:
+            place_ship_at (row, col, horizontal, length, fleet)
     return fleet
 
 
@@ -109,9 +112,12 @@ def check_if_hits(row, column, fleet):
     for x in range(len(fleet)):
         r = fleet[x][0]
         c = fleet[x][1]
-        if fleet [x][2] == False and row >= r and row <= (r+(fleet[x][3]-1)) and column == c:   return True #Iterates to check if there is any hit
-        if fleet [x][2] == True and row == r  and column >= c and column <= (c+(fleet[x][3])-1):    return True #Iterates to check if there is any hit
+        if fleet [x][2] == False and row >= r and row <= (r+(fleet[x][3]-1)) and column == c:   #Iterates to check if there is any hit
+             return True 
+        if fleet [x][2] == True and row == r  and column >= c and column <= (c+(fleet[x][3])-1):    #Iterates to check if there is any hit
+            return True 
     return False
+
 
 def hit(row, column, fleet):
     '''
@@ -127,9 +133,11 @@ def hit(row, column, fleet):
         if fleet [x][2] == False and row >= r and row <= (r+(fleet[x][3]-1)) and column == c:
             fleet1[x][4].add((row, column))
             z = x
+            break
         if fleet [x][2] == True and row == r  and column >= c and column <= (c+(fleet[x][3])-1):
             fleet1[x][4].add((row, column))
             z = x
+            break
     return (fleet1, fleet1[z])
 
 def are_unsunk_ships_left(fleet):
@@ -137,9 +145,19 @@ def are_unsunk_ships_left(fleet):
     Returns Boolean value, which is True if there are ships in the fleet that are still not sunk, and False otherwise
     '''
     for x in range(len(fleet)):
-        if fleet[x][3]!=len(fleet[x][4]):   return True
+        if fleet[x][3]!=len(fleet[x][4]):   
+            return True
     return False
 
+def check_if_not_already_hit(row, column, fleet):
+    '''
+    Returns Boolean value, which is true if the location has not been hit before and false if it has.
+    '''
+    for x in range(len(fleet)):
+        if (row, column) in fleet [x][4]:  #Iterates to check if there is any hit
+            return False
+    return True
+            
 def main():
     '''
     Where the program starts the execution of all the functions
@@ -157,13 +175,16 @@ def main():
             current_column = int(loc_str[1])
             if current_row<10 and current_column<10: #Forbids entry of out of bound entries
                 shots += 1
-                if check_if_hits(current_row, current_column, current_fleet):
-                    print("You have a hit!")
-                    (current_fleet, ship_hit) = hit(current_row, current_column, current_fleet)
-                    if is_sunk(ship_hit):
-                        print("You sank a " + ship_type(ship_hit) + "!")
+                if check_if_not_already_hit(current_row, current_column, current_fleet):
+                    if check_if_hits(current_row, current_column, current_fleet):
+                        print("You have a hit!")
+                        (current_fleet, ship_hit) = hit(current_row, current_column, current_fleet)
+                        if is_sunk(ship_hit):
+                            print("You sank a " + ship_type(ship_hit) + "!")
+                    else:
+                        print("You missed!")
                 else:
-                    print("You missed!")
+                    print("You missed! -- You have already hit this location")
             else:
                 print("You tried to hit outside the allowed area, please try again within 0 to 9")
         except: #handles the error
