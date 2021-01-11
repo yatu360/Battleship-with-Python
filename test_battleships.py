@@ -1,6 +1,9 @@
 import pytest
 from battleships import *
 
+K = [(6, 2, True, 4, {(6,2), (6,3), (6,5),(6,4)}), (5, 9, False, 3, {(5,9),(6,9),(7,9)}), (4, 5, True, 3, {(4,5),(4,6),(4,7)}), (8, 1, True, 2,{(8,1),(8,2)}), (2, 9, False, 2, {(2,9), (3,9)}), (8, 5, True, 2, {(8,5), (8,6)}), \
+        (1, 2, False, 1, {(1,2)}), (6, 7, True, 1, {(6,7)}), (2, 4, False, 1, {(2,4)}), (0, 6, False, 1, {(0,6)})]
+
 s = (2, 3, False, 3, {(2,3), (3,3), (4,3)}) 
 
 
@@ -35,6 +38,9 @@ f1 = [(3, 2, True, 4, set()), (9, 2, True, 3, {(9,2), (9,4)}), (5, 3, True, 3, s
     
 def test_check_if_hits1():
     assert check_if_hits(9,4,f1) == True #check for hit
+
+def test_check_if_not_already_hit1():
+    assert check_if_not_already_hit(6,7,K) == False #check for hit
 
 
 def test_hit1():
@@ -159,12 +165,14 @@ def test_ship_type4():
 s1_t4 = (2, 2, False, 3, set())
 s2_t4 = (5, 6, False, 4, set())
 f_t4 = [s1_t4, s2_t4]
+f_t4_1 = [(6, 2, True, 4, set()), (5, 9, False, 3, set()), (4, 5, True, 3, set()), (8, 1, True, 2, set()), (2, 9, False, 2, set()), (8, 5, True, 2, set()), \
+        (1, 2, False, 1, set()), (6, 7, True, 1, set())]
 
 def test_is_open_sea4(): 
     assert is_open_sea(4,2,f_t4) == False #Test to check illegal overlap placement
 
 def test_ok_to_place_ship_at4():
-    assert ok_to_place_ship_at(4,4, True, 3, f_t4) == False #Test to check if a new ship will occuply illegal i.e cell above existing ship
+    assert ok_to_place_ship_at(2,4, False, 1, f_t4_1) == True #Test to check if a new ship can be placed after placement of 8 other ships.
 
 def test_place_ship_at4():
     actual = place_ship_at(0,9, False, 1, f_t4)
