@@ -175,16 +175,16 @@ def main():
             current_column = int(loc_str[1])
             if current_row<10 and current_column<10: #Forbids entry of out of bound entries
                 shots += 1
-                if check_if_not_already_hit(current_row, current_column, current_fleet):
-                    if check_if_hits(current_row, current_column, current_fleet):
+                if check_if_hits(current_row, current_column, current_fleet):
+                    if check_if_not_already_hit(current_row, current_column, current_fleet):
                         print("You have a hit!")
                         (current_fleet, ship_hit) = hit(current_row, current_column, current_fleet)
                         if is_sunk(ship_hit):
                             print("You sank a " + ship_type(ship_hit) + "!")
                     else:
-                        print("You missed!")
+                        print("You missed! -- You have already hit this location")
                 else:
-                    print("You missed! -- You have already hit this location")
+                    print("You missed!")
             else:
                 print("You tried to hit outside the allowed area, please try again within 0 to 9")
         except: #handles the error
