@@ -1,8 +1,8 @@
 import pytest
 from battleships import *
 
-K = [(6, 2, True, 4, {(6,2), (6,3), (6,5),(6,4)}), (5, 9, False, 3, {(5,9),(6,9),(7,9)}), (4, 5, True, 3, {(4,5),(4,6),(4,7)}), (8, 1, True, 2,{(8,1),(8,2)}), (2, 9, False, 2, {(2,9), (3,9)}), (8, 5, True, 2, {(8,5), (8,6)}), \
-        (1, 2, False, 1, {(1,2)}), (6, 7, True, 1, {(6,7)}), (2, 4, False, 1, {(2,4)}), (0, 6, False, 1, {(0,6)})]
+K = [(6, 2, True, 4, {(6,2), (6,5),(6,4)}), (5, 9, False, 3, {(5,9),(6,9)}), (4, 5, True, 3, {(4,5),(4,6),(4,7)}), (8, 1, True, 2,{(8,1),(8,2)}), (2, 9, False, 2, {(2,9), (3,9)}), (8, 5, True, 2, {(8,5), (8,6)}), \
+        (1, 2, False, 1, {(1,2)}), (6, 7, True, 1, {(6,7)}), (2, 4, False, 1, {(2,4)}), (0, 6, False, 1, {(0,6)})] #This global list is used for the additional function check_if_not_already hit
 
 s = (2, 3, False, 3, {(2,3), (3,3), (4,3)}) 
 
@@ -40,7 +40,7 @@ def test_check_if_hits1():
     assert check_if_hits(9,4,f1) == True #check for hit
 
 def test_check_if_not_already_hit1():
-    assert check_if_not_already_hit(6,7,K) == False #check for hit
+    assert check_if_not_already_hit(6,7,K) == False #check if its not already hit
 
 
 def test_hit1():
@@ -103,6 +103,9 @@ f2_1 = [(6, 2, True, 4, {(6,2), (6,3), (6,5),(6,4)}), (5, 9, False, 3, {(5,9),(6
 def test_are_unsunk_ships_left2():
     assert are_unsunk_ships_left(f2_1)==False #Checks and returns that all the ships have been sunk
 
+def test_check_if_not_already_hit2():
+    assert check_if_not_already_hit(7,9,K) == True #check if its not already hit
+
 
 #Test Case 3
 s3 = (7, 3, False, 2, {(7,3)}) 
@@ -150,6 +153,9 @@ f3_1 = [(6, 2, True, 4, {(6,2), (6,3),(6,4)}), (5, 9, False, 3, {(5,9),(6,9),(7,
 
 def test_are_unsunk_ships_left3():
     assert are_unsunk_ships_left(f3_1)==True #2 shot remaining for all sunk
+
+def test_check_if_not_already_hit3():
+    assert check_if_not_already_hit(5,9,K) == False #check if its not already hit
 
 #Test case 4
 
@@ -203,6 +209,9 @@ f4_1 = [(6, 2, True, 4, {(6,2), (6,3), (6,5),(6,4)}), (5, 9, False, 3, {(5,9),(6
 def test_are_unsunk_ships_left4():
     assert are_unsunk_ships_left(f4_1)==True #Test for One shot remaining for all sunk --Cruiser only has been shot twice
 
+def test_check_if_not_already_hit4():
+    assert check_if_not_already_hit(6,3,K) == True #check if its not already hit
+
 #Test case 5
 
 s5 = (2, 0, True, 4, {(2,0), (2,1), (2,2), (2,3)}) 
@@ -251,3 +260,6 @@ f5_1 = [(6, 2, True, 4, set()), (5, 9, False, 3, {(5,9),(6,9),(7,9)}), (4, 5, Tr
 
 def test_are_unsunk_ships_left5():
     assert are_unsunk_ships_left(f5_1)==True
+
+def test_check_if_not_already_hit5():
+    assert check_if_not_already_hit(8,2,K) == False #check if its not already hit
