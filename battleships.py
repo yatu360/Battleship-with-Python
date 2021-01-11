@@ -182,7 +182,7 @@ def main():
                         if is_sunk(ship_hit):
                             print("You sank a " + ship_type(ship_hit) + "!")
                     else:
-                        print("You missed! -- You have already hit this location")
+                        print("You missed!")
                 else:
                     print("You missed!")
             else:

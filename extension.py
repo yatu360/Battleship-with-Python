@@ -49,7 +49,7 @@ def button_click(number):
                     disptext = ("You sank a " + battleships.ship_type(ship_hit) + "!")
                     label3.config(text= disptext)
             else:
-                label2.config(text = "You missed! -- You have already hit this location")
+                label2.config(text = "You missed!")
                 label3.config(text = " ")
         else:
             label2.config(text = "You missed!")
