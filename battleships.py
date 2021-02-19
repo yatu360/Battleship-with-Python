@@ -1,6 +1,6 @@
 import random
 
-#14022021
+#19022021
 
 def is_sunk(ship):
     '''
@@ -16,7 +16,7 @@ def ship_type(ship):
     Returns one of the strings "battleship", "cruiser", "destroyer", or "submarine" identifying the type of ship
     '''
     ship_dict = {4: "battleship", 3: "cruiser", 2: "destroyer", 1: "submarine"}
-    return ship_dict[ship[3]]   #Checks with the dictionary and returns the type of ship using the length of the ship stored in the data set.
+    return ship_dict[ship[3]]   #Checks with the dictionary and returns the type of ship using the length of the ship stored in the data set..
 
 def is_open_sea(row, column, fleet):
     '''
