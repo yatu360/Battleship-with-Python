@@ -4,8 +4,8 @@ import battleships
 
 
 current_fleet = battleships.randomly_place_all_ships()
-root = Tk() #
-root.title("Battleship Game: POP1 Coursework by Yathurshen Muralitharan") #Set window title
+root = Tk() 
+root.title("Battleship Game by Yathurshen Muralitharan") #Set window title
 label2= Label(root, text="")                                              #Creates a label widget using the label class
 label2.grid(row=11, column=1, columnspan=10)                              #Set its position on the form using the grid function and provides it the location
 label3= Label(root, text="")
