@@ -1,20 +1,10 @@
-#Name: Yathurshen Muralitharan
-#Student ID: 13193494
-#Github username & email: yatu360 -- yatu360@gmail.com
-#BBK email: ymural01@student.bbk.ac.uk
-
 import random
-
-#19022021
 
 def is_sunk(ship):
     '''
     Returns Boolean value, which is True if ship is sunk and False otherwise
     '''
-    if ship[3]==len(ship[4]):   
-        return True
-    else:
-        return False
+    return(ship[3]==len(ship[4])) 
 
 def ship_type(ship):
     '''
