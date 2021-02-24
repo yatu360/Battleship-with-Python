@@ -10,7 +10,7 @@ label2= Label(root, text="")                                              #Creat
 label2.grid(row=11, column=1, columnspan=10)                              #Set its position on the form using the grid function and provides it the location
 label3= Label(root, text="")
 label3.grid(row=12, column=1, columnspan=10)
-label4= Label(root, text="")
+label4= Label(root, text="")g
 label4.grid(row=13, column=1, columnspan=10)
 label5= Label(root, text="")
 label5.grid(row=14, column=1, columnspan=10)
