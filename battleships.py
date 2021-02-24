@@ -1,3 +1,8 @@
+#Name: Yathurshen Muralitharan
+#Student ID: 13193494
+#Github username & email: yatu360 -- yatu360@gmail.com
+#BBK email: ymural01@student.bbk.ac.uk
+
 import random
 
 
